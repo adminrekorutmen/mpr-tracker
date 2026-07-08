@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Rekosistem MPR Tracker</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
+</head>
+<body class="bg-[#F4F7FE] min-h-screen flex">
+  <div id="sidebar-container"></div>
+  <main class="flex-1 flex flex-col min-w-0">
+    <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10">
+      <div>
+        <h2 class="text-sm font-semibold text-slate-700">Dashboard Analitik</h2>
+        <p class="text-xs text-slate-400">Ringkasan pengajuan divisi Anda</p>
+      </div>
+    </header>
+    <div class="p-8 space-y-8 flex-1 overflow-y-auto">
+      <div>
+        <h1 class="text-2xl font-bold text-[#0B1E43]">Selamat Datang di Portal MPR Tracker</h1>
+        <p class="text-xs text-slate-400 mt-1">Gunakan menu di samping untuk membuat permintaan manpower baru atau melacak proses rekrutmen.</p>
+      </div>
+      <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm">
+        <h3 class="font-bold text-[#0B1E43] mb-2">Petunjuk Penggunaan:</h3>
+        <ul class="list-disc pl-5 text-sm text-slate-600 space-y-2">
+          <li>Pilih menu <b>Submit Pengajuan</b> untuk mengajukan manpower baru.</li>
+          <li>Pantau progres pencarian kandidat oleh HCGA di menu <b>Tracker & Status Pengajuan</b>.</li>
+          <li>Riwayat pengajuan yang disetujui atau ditolak dapat dilihat di menu <b>History Pengajuan</b>.</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+  <script src="js/sidebar.js"></script>
+</body>
+</html>

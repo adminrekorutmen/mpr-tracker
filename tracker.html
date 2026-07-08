@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tracker - Rekosistem</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
+</head>
+<body class="bg-[#F4F7FE] min-h-screen flex">
+  <div id="sidebar-container"></div>
+  <main class="flex-1 flex flex-col min-w-0">
+    <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10">
+      <div>
+        <h2 class="text-sm font-semibold text-slate-700">Tracker & Status Pengajuan</h2>
+        <p class="text-xs text-slate-400">Pantau progres pemenuhan manpower Anda</p>
+      </div>
+    </header>
+    <div class="p-8 space-y-8 flex-1 overflow-y-auto">
+      <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+        <div class="p-6 border-b border-slate-100 bg-slate-50/50">
+          <h3 class="font-bold text-slate-700 text-sm">Daftar Pengajuan Aktif</h3>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-50 text-slate-500 text-[10px] uppercase font-bold tracking-wider border-b border-slate-100">
+                <th class="py-4 px-6">ID Pengajuan</th>
+                <th class="py-4 px-6">Posisi</th>
+                <th class="py-4 px-6">Divisi</th>
+                <th class="py-4 px-6">Jumlah</th>
+                <th class="py-4 px-6">Status Rekrutmen</th>
+                <th class="py-4 px-6">Tanggal Update</th>
+              </tr>
+            </thead>
+            <tbody id="trackerTableBody" class="text-xs text-slate-600 divide-y divide-slate-100">
+              <tr>
+                <td colspan="6" class="py-8 text-center text-slate-400">Menghubungkan ke database...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="js/sidebar.js"></script>
+</body>
+</html>

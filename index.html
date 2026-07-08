@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Rekosistem MPR Tracker</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
+</head>
+<body class="bg-[#0B1E43] min-h-screen flex items-center justify-center p-4">
+  <div class="bg-white w-full max-w-md p-8 rounded-3xl shadow-2xl space-y-6">
+    <div class="text-center space-y-2">
+      <div class="w-16 h-16 bg-[#2E7D32] text-white rounded-2xl flex items-center justify-center font-bold text-3xl mx-auto shadow-lg">R</div>
+      <h1 class="text-2xl font-bold text-[#0B1E43] tracking-tight">REKOSISTEM</h1>
+      <p class="text-xs text-slate-400 font-medium">Manpower Request (MPR) Tracker Portal</p>
+    </div>
+    <form id="loginForm" class="space-y-4">
+      <div>
+        <label class="block text-xs font-semibold text-slate-600 mb-2">Email Perusahaan</label>
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400"><i class="fa-regular fa-envelope"></i></span>
+          <input type="email" id="emailInput" required placeholder="nama@rekosistem.com" class="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#2E7D32] transition-all">
+        </div>
+      </div>
+      <div id="errorMessage" class="hidden text-xs text-red-500 bg-red-50 p-3 rounded-lg flex items-center gap-2">
+        <i class="fa-solid fa-triangle-exclamation"></i><span></span>
+      </div>
+      <button type="submit" class="w-full bg-[#2E7D32] hover:bg-[#1B5E20] text-white font-semibold py-3 rounded-xl transition-all text-sm flex items-center justify-center gap-2">
+        <span>Masuk Aplikasi</span><i class="fa-solid fa-arrow-right-to-bracket text-xs"></i>
+      </button>
+    </form>
+    <div class="text-center"><p class="text-[10px] text-slate-400">&copy; 2024 Rekosistem HCGA Department.</p></div>
+  </div>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

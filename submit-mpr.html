@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit MPR - Rekosistem</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
+</head>
+<body class="bg-[#F4F7FE] min-h-screen flex">
+  <div id="sidebar-container"></div>
+  <main class="flex-1 flex flex-col min-w-0">
+    <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10">
+      <div>
+        <h2 class="text-sm font-semibold text-slate-700">Form Pengajuan Manpower</h2>
+        <p class="text-xs text-slate-400">Kirim permintaan tenaga kerja baru</p>
+      </div>
+    </header>
+    <div class="p-8 space-y-8 flex-1 overflow-y-auto">
+      <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+        <form id="mprForm" class="p-8 space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-4">
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-2">Departemen / Divisi <span class="text-red-500">*</span></label>
+                <input type="text" id="divisiInput" readonly class="w-full px-4 py-3 rounded-lg border border-slate-100 bg-slate-50 text-sm focus:outline-none">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-2">Jabatan / Level <span class="text-red-500">*</span></label>
+                <select id="jabatanInput" required class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#0B1E43]">
+                  <option value="">Pilih Jabatan</option>
+                  <option value="VP">VP</option>
+                  <option value="Manager">Manager</option>
+                  <option value="Senior Staff">Senior Staff</option>
+                  <option value="Staff">Staff</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-2">Jumlah Kebutuhan <span class="text-red-500">*</span></label>
+                <input type="number" id="jumlahInput" min="1" required placeholder="Masukkan jumlah" class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#0B1E43]">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-2">Lokasi Penempatan <span class="text-red-500">*</span></label>
+                <input type="text" id="lokasiInput" required placeholder="Contoh: Jakarta Barat" class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#0B1E43]">
+              </div>
+            </div>
+            <div class="space-y-4">
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-2">Jenis Tenaga Kerja <span class="text-red-500">*</span></label>
+                <select id="jenisInput" required class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#0B1E43]">
+                  <option value="">Pilih Jenis</option>
+                  <option value="Mitra">Mitra</option>
+                  <option value="Karyawan">Karyawan</option>
+                  <option value="Intern">Intern</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-2">Tanggal Dibutuhkan <span class="text-red-500">*</span></label>
+                <input type="date" id="tanggalInput" required class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#0B1E43]">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-2">Alasan Kebutuhan <span class="text-red-500">*</span></label>
+                <textarea id="alasanInput" rows="4" required placeholder="Jelaskan alasan..." class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#0B1E43] resize-none"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="border-t border-slate-100 pt-6">
+            <label class="block text-xs font-semibold text-slate-600 mb-2">Kualifikasi yang Dibutuhkan <span class="text-slate-400">(Opsional)</span></label>
+            <textarea id="kualifikasiInput" rows="3" placeholder="Contoh: Pengalaman minimal 1 tahun..." class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#0B1E43]"></textarea>
+          </div>
+          <div class="flex justify-end gap-4 border-t border-slate-100 pt-6">
+            <button type="reset" class="px-6 py-3 border border-slate-200 hover:bg-slate-50 text-slate-600 rounded-lg text-sm font-semibold transition-all">Reset</button>
+            <button type="submit" id="submitBtn" class="px-6 py-3 bg-[#0B1E43] hover:bg-[#112E62] text-white rounded-lg text-sm font-semibold flex items-center gap-2 transition-all">
+              <span>Kirim Pengajuan</span><i class="fa-solid fa-paper-plane text-xs"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+  <script src="js/sidebar.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/submit.js"></script>
+</body>
+</html>
