@@ -2,8 +2,13 @@ document.addEventListener("DOMContentLoaded", function () {
   // 1. Ambil Sesi Login Pengguna
   const userData = JSON.parse(localStorage.getItem("session_rekosistem_user"));
 
-  // Proteksi Halaman: Jika belum login, tendang balik ke halaman login
+  // 2. Dapatkan path saat ini (Wajib didefinisikan di awal!)
+  const currentPath = window.location.pathname;
+
+  // 3. Deteksi Halaman Login
   const isLoginPage = currentPath.endsWith("index.html") || currentPath.endsWith("/") || currentPath === "";
+
+  // 4. Proteksi Halaman: Jika belum login, tendang balik ke halaman login
   if (!userData && !isLoginPage && !currentPath.includes("approval.html")) {
     window.location.href = "index.html";
     return;
@@ -12,9 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const container = document.getElementById("sidebar-container");
   if (!container) return;
 
-  const currentPath = window.location.pathname;
-
-  // Render Sidebar secara otomatis ke semua halaman
+  // 5. Render Sidebar secara otomatis ke semua halaman
   container.innerHTML = `
     <aside class="w-72 bg-[#0B1E43] text-white flex flex-col justify-between min-h-screen sticky top-0">
       <div>
@@ -39,7 +42,9 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
       <div class="p-6 border-t border-slate-700/50">
         <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 bg-emerald-500/20 text-emerald-500 rounded-full flex items-center justify-center font-bold">${userData ? userData.nama.slice(0,2).toUpperCase() : 'US'}</div>
+          <div class="w-10 h-10 bg-emerald-500/20 text-emerald-500 rounded-full flex items-center justify-center font-bold">
+            ${userData ? userData.nama.slice(0,2).toUpperCase() : 'US'}
+          </div>
           <div>
             <h4 class="font-semibold text-sm">${userData ? userData.nama : 'User'}</h4>
             <p class="text-xs text-slate-400">${userData ? userData.divisi : 'Division'}</p>
