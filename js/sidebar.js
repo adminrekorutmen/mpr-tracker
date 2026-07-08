@@ -3,7 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const userData = JSON.parse(localStorage.getItem("session_rekosistem_user"));
 
   // Proteksi Halaman: Jika belum login, tendang balik ke halaman login
-  if (!userData && !window.location.pathname.endsWith("index.html") && !window.location.pathname.includes("approval.html")) {
+  const isLoginPage = currentPath.endsWith("index.html") || currentPath.endsWith("/") || currentPath === "";
+  if (!userData && !isLoginPage && !currentPath.includes("approval.html")) {
     window.location.href = "index.html";
     return;
   }
