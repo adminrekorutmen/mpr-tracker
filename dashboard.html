@@ -3,36 +3,171 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard - Rekosistem MPR Tracker</title>
+  <title>Portal MPR - Rekosistem</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    /* Animasi Transisi Halus */
+    .page-section {
+      animation: fadeIn 0.4s ease-in-out forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body class="bg-[#F4F7FE] min-h-screen flex">
+
+  <!-- Wadah Sidebar Otomatis -->
   <div id="sidebar-container"></div>
+
+  <!-- KONTEN UTAMA -->
   <main class="flex-1 flex flex-col min-w-0">
-    <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10">
+    
+    <!-- Top Bar -->
+    <header class="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center sticky top-0 z-10 shadow-sm">
       <div>
-        <h2 class="text-sm font-semibold text-slate-700">Dashboard Analitik</h2>
-        <p class="text-xs text-slate-400">Ringkasan pengajuan divisi Anda</p>
+        <h2 id="topbar-title" class="text-sm font-bold text-slate-700">Dashboard Analitik</h2>
+        <p id="topbar-subtitle" class="text-xs text-slate-400">Ringkasan portal internal Rekosistem</p>
+      </div>
+      <div class="relative cursor-pointer hover:scale-105 transition-all">
+        <i class="fa-regular fa-bell text-xl text-slate-600 hover:text-slate-900"></i>
+        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-semibold">1</span>
       </div>
     </header>
-    <div class="p-8 space-y-8 flex-1 overflow-y-auto">
-      <div>
-        <h1 class="text-2xl font-bold text-[#0B1E43]">Selamat Datang di Portal MPR Tracker</h1>
-        <p class="text-xs text-slate-400 mt-1">Gunakan menu di samping untuk membuat permintaan manpower baru atau melacak proses rekrutmen.</p>
+
+    <!-- CONTAINER HALAMAN (Seksi dinamis yang akan berganti tanpa kedip) -->
+    <div class="p-8 flex-1 overflow-y-auto">
+      
+      <!-- ========================================== -->
+      <!-- SEKSI 1: DASHBOARD                         -->
+      <!-- ========================================== -->
+      <div id="section-dashboard" class="page-section space-y-6">
+        <div class="bg-gradient-to-r from-[#0B1E43] to-[#112E62] p-8 rounded-3xl text-white shadow-xl">
+          <h1 class="text-2xl font-bold">Selamat Datang di Portal MPR Tracker</h1>
+          <p class="text-xs text-slate-300 mt-2 max-w-xl">Portal internal Rekosistem untuk mempermudah koordinasi permintaan manpower (tenaga kerja baru) antar divisi secara transparan dan terstruktur.</p>
+        </div>
+        
+        <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm space-y-4">
+          <h3 class="font-bold text-[#0B1E43] flex items-center gap-2"><i class="fa-solid fa-circle-info text-emerald-500"></i> Petunjuk Penggunaan:</h3>
+          <ul class="list-disc pl-5 text-sm text-slate-600 space-y-2">
+            <li>Klik menu <b class="text-[#0B1E43]">Submit Pengajuan</b> untuk mengajukan manpower baru dari divisi Anda.</li>
+            <li>HCGA dan Manajemen akan memproses pengajuan Anda, dan progresnya dapat dipantau di menu <b class="text-[#0B1E43]">Tracker & Status</b>.</li>
+            <li>Jika ada kendala operasional, silakan hubungi tim HCGA di kantor utama.</li>
+          </ul>
+        </div>
       </div>
-      <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm">
-        <h3 class="font-bold text-[#0B1E43] mb-2">Petunjuk Penggunaan:</h3>
-        <ul class="list-disc pl-5 text-sm text-slate-600 space-y-2">
-          <li>Pilih menu <b>Submit Pengajuan</b> untuk mengajukan manpower baru.</li>
-          <li>Pantau progres pencarian kandidat oleh HCGA di menu <b>Tracker & Status Pengajuan</b>.</li>
-          <li>Riwayat pengajuan yang disetujui atau ditolak dapat dilihat di menu <b>History Pengajuan</b>.</li>
-        </ul>
+
+      <!-- ========================================== -->
+      <!-- SEKSI 2: SUBMIT PENGAJUAN (FORMULIR)       -->
+      <!-- ========================================== -->
+      <div id="section-submit" class="page-section hidden space-y-6">
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+          <div class="border-b border-slate-100 px-8 py-5 bg-slate-50/50 flex items-center gap-3">
+            <i class="fa-solid fa-align-left text-slate-400"></i>
+            <h2 class="font-bold text-slate-700 text-sm">Form Pengajuan Manpower</h2>
+          </div>
+          <form id="mprForm" class="p-8 space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-4">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-600 mb-2">Departemen / Divisi</label>
+                  <input type="text" id="divisiInput" readonly class="w-full px-4 py-3 rounded-lg border border-slate-100 bg-slate-50 text-sm text-slate-500 focus:outline-none">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-600 mb-2">Jabatan / Level <span class="text-red-500">*</span></label>
+                  <select id="jabatanInput" required class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                    <option value="">Pilih Jabatan</option>
+                    <option value="VP">VP</option>
+                    <option value="Manager">Manager</option>
+                    <option value="Senior Staff">Senior Staff</option>
+                    <option value="Staff">Staff</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-600 mb-2">Jumlah Kebutuhan <span class="text-red-500">*</span></label>
+                  <input type="number" id="jumlahInput" min="1" required placeholder="Masukkan jumlah" class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-600 mb-2">Lokasi Penempatan <span class="text-red-500">*</span></label>
+                  <input type="text" id="lokasiInput" required placeholder="Contoh: Jakarta Barat" class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+              </div>
+              <div class="space-y-4">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-600 mb-2">Jenis Tenaga Kerja <span class="text-red-500">*</span></label>
+                  <select id="jenisInput" required class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                    <option value="">Pilih Jenis</option>
+                    <option value="Mitra">Mitra</option>
+                    <option value="Karyawan">Karyawan</option>
+                    <option value="Intern">Intern</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-600 mb-2">Tanggal Dibutuhkan <span class="text-red-500">*</span></label>
+                  <input type="date" id="tanggalInput" required class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-600 mb-2">Alasan Kebutuhan <span class="text-red-500">*</span></label>
+                  <textarea id="alasanInput" rows="4" required placeholder="Jelaskan alasan kebutuhan..." class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="border-t border-slate-100 pt-6">
+              <label class="block text-xs font-semibold text-slate-600 mb-2">Kualifikasi yang Dibutuhkan <span class="text-slate-400">(Opsional)</span></label>
+              <textarea id="kualifikasiInput" rows="3" placeholder="Contoh: Pengalaman minimal 1 tahun..." class="w-full px-4 py-3 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
+            </div>
+            <div class="flex justify-end gap-4 border-t border-slate-100 pt-6">
+              <button type="reset" class="px-6 py-3 border border-slate-200 hover:bg-slate-50 text-slate-600 rounded-lg text-sm font-semibold transition-all">Reset</button>
+              <button type="submit" id="submitBtn" class="px-6 py-3 bg-[#0B1E43] hover:bg-[#112E62] text-white rounded-lg text-sm font-semibold flex items-center gap-2 transition-all shadow-md">
+                <span>Kirim Pengajuan</span><i class="fa-solid fa-paper-plane text-xs"></i>
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
+
+      <!-- ========================================== -->
+      <!-- SEKSI 3: TRACKER & STATUS                  -->
+      <!-- ========================================== -->
+      <div id="section-tracker" class="page-section hidden space-y-6">
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+          <div class="p-6 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
+            <h3 class="font-bold text-slate-700 text-sm">Daftar Pengajuan Aktif</h3>
+            <button id="refreshTrackerBtn" class="px-4 py-2 text-xs font-semibold bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-all flex items-center gap-2">
+              <i class="fa-solid fa-rotate"></i> Muat Ulang
+            </button>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-slate-50 text-slate-500 text-[10px] uppercase font-bold tracking-wider border-b border-slate-100">
+                  <th class="py-4 px-6">ID Pengajuan</th>
+                  <th class="py-4 px-6">Posisi / Jabatan</th>
+                  <th class="py-4 px-6">Jumlah</th>
+                  <th class="py-4 px-6">Jenis Tenaga</th>
+                  <th class="py-4 px-6">Status</th>
+                  <th class="py-4 px-6">Tanggal Update</th>
+                </tr>
+              </thead>
+              <tbody id="trackerTableBody" class="text-xs text-slate-600 divide-y divide-slate-100">
+                <tr>
+                  <td colspan="6" class="py-8 text-center text-slate-400">Klik "Muat Ulang" untuk memuat data rekrutmen...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
     </div>
   </main>
+
+  <script src="js/api.js"></script>
   <script src="js/sidebar.js"></script>
+  <script src="js/submit.js"></script>
 </body>
 </html>
