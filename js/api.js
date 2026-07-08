@@ -2,8 +2,8 @@
 // KONEKSI UTAMA KE DATABASE GOOGLE SHEETS
 // ==========================================
 // MASUKKAN URL WEB APP GOOGLE APPS SCRIPT ANDA DI SINI
-const GAS_API_URL = "aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BS2Z5Y2J4bUdMYXhZbk9qd1AtcUNaMV9GMDlHMVFlRGMwblEyejB0ODNCdFlVcG5TMDRMRTZQSGhjVTB0SzVBMnNkczRVWTMvZXhlYw=="; 
-const API_KEY = "S1VOQ0lfUkFIQVNJQV9SRUtPU0lTVEVNXzEyMw==";
+const GAS_API_URL = "https://script.google.com/macros/s/AKfycbxmGLaxYnOjwP-qCZ1_F09G1QeDc0nQ2z0t83BtYUpnS04LE6PHhcU0tK5A2sds4UY3/exec"; 
+const API_KEY = "KUNCI_RAHASIA_REKOSISTEM_123";
 
 // Fungsi pembantu agar pengiriman data ke Google Sheets stabil dan terhindar dari error CORS
 async function callGAS(payload) {
